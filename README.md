@@ -1,6 +1,6 @@
 # a2
 
-[![CI Status](https://github.com/walletconnect/a2/actions/workflows/ci.yml/badge.svg)](https://github.com/walletconnect/a2/actions/workflows/ci.yml)
+[![CI Status](https://github.com/reown-com/a2/actions/workflows/ci.yml/badge.svg)](https://github.com/reown-com/a2/actions/workflows/ci.yml)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![crates.io](https://img.shields.io/crates/v/a2)](https://crates.io/crates/a2)
 [![docs.rs](https://img.shields.io/badge/docs.rs-a2-blue)](https://docs.rs/a2/)
@@ -30,14 +30,14 @@ Needs a Tokio executor version 1.0 or later and Rust compiler version 1.82.0 or 
 
 The library supports connecting to Apple Push Notification service [either using
 a
-certificate](https://github.com/walletconnect/a2/blob/master/examples/certificate_client.rs)
+certificate](https://github.com/reown-com/a2/blob/master/examples/certificate_client.rs)
 with a password [or a private
-key](https://github.com/walletconnect/a2/blob/master/examples/token_client.rs) with
+key](https://github.com/reown-com/a2/blob/master/examples/token_client.rs) with
 a team id and key id. Both are available from your Apple account and with both
 it is possible to send push notifications to one application.
 
 To see it used in a real project, take a look to the [Echo
-Server](https://github.com/walletconnect/echo-server), which is a project by WalletConnect to
+Server](https://github.com/reown-com/echo-server), which is a project by WalletConnect to
 handle incoming webhooks and converting them to push notifications.
 
 ## Gotchas
