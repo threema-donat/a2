@@ -71,10 +71,12 @@ impl Secret {
 
     #[cfg(all(not(feature = "openssl"), feature = "ring"))]
     fn new_ring(pem_key: &[u8]) -> Result<Self, Error> {
-        let der = pem::parse(pem_key).map_err(SignerError::Pem)?;
+        use rustls_pki_types::{PrivateKeyDer, pem::PemObject};
+
+        let key = PrivateKeyDer::from_pem_slice(pem_key).map_err(SignerError::Pem)?;
         let alg = &signature::ECDSA_P256_SHA256_FIXED_SIGNING;
         let rng = rand::SystemRandom::new();
-        let signing_key = signature::EcdsaKeyPair::from_pkcs8(alg, der.contents(), &rng)?;
+        let signing_key = signature::EcdsaKeyPair::from_pkcs8(alg, key.secret_der(), &rng)?;
         Ok(Self::Ring { signing_key, rng })
     }
 
@@ -233,7 +235,7 @@ pub enum SignerError {
     OpenSSL(#[from] openssl::error::ErrorStack),
     #[cfg(all(not(feature = "openssl"), feature = "ring"))]
     #[error(transparent)]
-    Pem(#[from] pem::PemError),
+    Pem(#[from] rustls_pki_types::pem::Error),
     #[cfg(all(not(feature = "openssl"), feature = "ring"))]
     #[error(transparent)]
     Ring(#[from] ring::error::Unspecified),
